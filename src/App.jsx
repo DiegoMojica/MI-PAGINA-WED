@@ -1,0 +1,841 @@
+﻿import { useEffect, useState } from "react";
+import {
+  Bot,
+  ChartNoAxesColumn,
+  Cog,
+  Database,
+  Github,
+  Globe,
+  Handshake,
+  LayoutPanelTop,
+  Linkedin,
+  Mail,
+  Menu,
+  MessageCircle,
+  MonitorSmartphone,
+  Send,
+  Server,
+  ShieldCheck,
+  Sparkles,
+  X,
+} from "lucide-react";
+
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
+const navItems = [
+  { label: "Inicio", href: "#inicio" },
+  { label: "Servicios", href: "#servicios" },
+  { label: "Proyectos", href: "#proyectos" },
+  { label: "Sobre mi", href: "#sobre-mi" },
+  { label: "Contacto", href: "#contacto" },
+];
+
+const services = [
+  {
+    title: "Paginas Web",
+    description: "Presencia profesional para captar clientes y mejorar la credibilidad digital.",
+    icon: Globe,
+    image: "/images/services/web-corporativa.webp",
+    imageHint: "web corporativa moderna, dashboard y laptop",
+    benefits: ["Diseno responsive", "Carga rapida", "SEO tecnico base", "Enfoque comercial"],
+  },
+  {
+    title: "Automatizacion",
+    description: "Procesos mas agiles, menos tareas manuales y menos errores operativos.",
+    icon: Cog,
+    image: "/images/services/automatizacion-procesos.webp",
+    imageHint: "flujo automatizado de negocio, integraciones y datos",
+    benefits: ["Flujos automaticos", "Integraciones", "Alertas y reportes", "Estandarizacion"],
+  },
+  {
+    title: "IA para Negocios",
+    description: "Atencion y clasificacion inteligente para responder mas rapido y mejor.",
+    icon: Bot,
+    image: "/images/services/ia-negocios.webp",
+    imageHint: "asistente IA para atencion al cliente empresarial",
+    benefits: ["Asistentes virtuales", "Filtro de leads", "Respuestas rapidas", "Mejor experiencia"],
+  },
+  {
+    title: "Sistemas a Medida",
+    description: "Herramientas internas para controlar operacion y escalar con orden.",
+    icon: LayoutPanelTop,
+    image: "/images/services/sistema-medida.webp",
+    imageHint: "sistema interno empresarial, panel administrativo",
+    benefits: ["Paneles internos", "Control de procesos", "Roles y permisos", "Escalabilidad"],
+  },
+  {
+    title: "Aplicaciones Moviles",
+    description: "Desarrollo de apps moviles para Android y soluciones multiplataforma.",
+    icon: MonitorSmartphone,
+    image: "/images/services/aplicaciones-moviles.webp",
+    imageHint: "aplicaciones moviles, smartphone con interfaz moderna",
+    benefits: ["Apps Android", "Flutter y Dart", "Integracion con APIs", "Publicacion y soporte"],
+  },
+];
+
+const benefits = [
+  { title: "Imagen profesional", text: "Tu negocio transmite seriedad desde el primer contacto." },
+  { title: "Atencion mas rapida", text: "Flujos digitales que acortan tiempos de respuesta." },
+  { title: "Menos trabajo manual", text: "Automatizaciones para eliminar tareas repetitivas." },
+  { title: "Mejor control interno", text: "Datos y procesos centralizados para decidir mejor." },
+];
+
+const process = [
+  { step: "1", title: "Entiendo el problema", text: "Alineo objetivos, contexto y prioridad de negocio." },
+  { step: "2", title: "Diseño la solucion", text: "Defino alcance, arquitectura y flujo funcional." },
+  { step: "3", title: "Desarrollo e implemento", text: "Construyo de forma iterativa con validaciones tecnicas." },
+  { step: "4", title: "Entrego y doy soporte", text: "Realizo ajustes post-entrega y mejora continua." },
+];
+
+const techGroups = [
+  {
+    title: "Frontend",
+    icon: Globe,
+    items: ["HTML5", "CSS3", "JavaScript", "TypeScript", "React", "Vue", "Tailwind", "Bootstrap"],
+  },
+  {
+    title: "Backend",
+    icon: Server,
+    items: ["Node.js", "Express", "C#", ".NET", "Python", "Django", "PHP", "REST API"],
+  },
+  {
+    title: "Bases de datos",
+    icon: Database,
+    items: ["MySQL", "PostgreSQL", "SQL Server", "MongoDB", "Firebase"],
+  },
+  {
+    title: "Movil",
+    icon: MonitorSmartphone,
+    items: ["Java", "Android", "Dart", "Flutter"],
+  },
+  {
+    title: "Automatizacion",
+    icon: Sparkles,
+    items: ["Webhooks", "Bots", "Integraciones", "WhatsApp API", "Email workflows"],
+  },
+  {
+    title: "Herramientas",
+    icon: Cog,
+    items: ["Git", "GitHub", "Postman", "Figma", "Docker"],
+  },
+];
+
+const trustPills = [
+  "Soluciones para negocios",
+  "Desarrollo moderno y responsive",
+  "Web y apps moviles",
+  "Soporte y mantenimiento",
+];
+
+const heroCapabilities = [
+  {
+    title: "Web comercial",
+    text: "Captacion y confianza.",
+    icon: Globe,
+  },
+  {
+    title: "App movil",
+    text: "Android y Flutter.",
+    icon: MonitorSmartphone,
+  },
+  {
+    title: "IA aplicada",
+    text: "Respuestas mas rapidas.",
+    icon: Bot,
+  },
+  {
+    title: "Sistemas internos",
+    text: "Control y trazabilidad.",
+    icon: LayoutPanelTop,
+  },
+];
+
+const testimonials = [
+  {
+    quote:
+      "Diego entendio exactamente lo que necesitabamos y entrego una web clara, profesional y facil de usar. Lo recomendamos totalmente para proyectos digitales serios.",
+    author: "Ecografias del Llano",
+    role: "Cliente - Sitio en produccion",
+    featured: true,
+  },
+];
+
+const contactItems = [
+  {
+    label: "Email",
+    value: "diegomojica261@gmail.com",
+    href: "mailto:diegomojica261@gmail.com",
+    icon: Mail,
+  },
+  {
+    label: "GitHub",
+    value: "github.com/DiegoMojica",
+    href: "https://github.com/DiegoMojica",
+    icon: Github,
+  },
+  {
+    label: "LinkedIn",
+    value: "linkedin.com/in/IngDiegoMojica",
+    href: "https://www.linkedin.com/in/IngDiegoMojica",
+    icon: Linkedin,
+  },
+  {
+    label: "WhatsApp",
+    value: "322 844 1820",
+    href: "https://wa.me/573228441820?text=Hola%20Diego%2C%20quiero%20informacion%20sobre%20un%20proyecto.",
+    icon: MessageCircle,
+  },
+];
+
+function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [heroCodeError, setHeroCodeError] = useState(false);
+  const [projectImageError, setProjectImageError] = useState(false);
+  const [formData, setFormData] = useState({
+    nombre: "",
+    correo: "",
+    mensaje: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formNotice, setFormNotice] = useState({
+    type: "",
+    text: "",
+  });
+  const year = new Date().getFullYear();
+
+  useEffect(() => {
+    const items = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("reveal-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    items.forEach((item) => observer.observe(item));
+    return () => observer.disconnect();
+  }, []);
+
+  const handleNavClick = (event, href) => {
+    if (href === "#inicio") {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    setMenuOpen(false);
+  };
+
+  const handleFormChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    setFormNotice({ type: "", text: "" });
+    setIsSubmitting(true);
+
+    try {
+      const payload = new FormData();
+      payload.append("nombre", formData.nombre);
+      payload.append("correo", formData.correo);
+      payload.append("mensaje", formData.mensaje);
+      payload.append("_subject", "Nuevo mensaje desde el portafolio de Diego Mojica");
+      payload.append("_captcha", "false");
+
+      const response = await fetch("https://formsubmit.co/ajax/diegomojica261@gmail.com", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: payload,
+      });
+
+      if (!response.ok) {
+        throw new Error("No se pudo enviar el mensaje");
+      }
+
+      setFormData({
+        nombre: "",
+        correo: "",
+        mensaje: "",
+      });
+      setFormNotice({
+        type: "success",
+        text: "Mensaje enviado correctamente. Te respondere pronto.",
+      });
+    } catch (error) {
+      setFormNotice({
+        type: "error",
+        text: "No fue posible enviar el mensaje. Intenta de nuevo en un momento.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-[linear-gradient(180deg,#ffffff_0%,#f7faff_100%)] text-[var(--foreground)]">
+      <div className="pointer-events-none fixed -top-30 -right-16 h-96 w-96 rounded-full bg-[radial-gradient(circle,rgba(29,78,216,0.26),rgba(29,78,216,0))]" />
+      <div className="pointer-events-none fixed -bottom-30 -left-16 h-96 w-96 rounded-full bg-[radial-gradient(circle,rgba(106,164,255,0.22),rgba(106,164,255,0))]" />
+
+      <header className="sticky top-0 z-50 border-b border-[rgba(216,227,245,0.8)] bg-[rgba(255,255,255,0.9)] backdrop-blur">
+        <div className="mx-auto flex min-h-[76px] w-[min(1120px,92%)] items-center justify-between gap-4">
+          <a
+            href="#inicio"
+            className="inline-flex items-center gap-2 font-extrabold"
+            onClick={(event) => handleNavClick(event, "#inicio")}
+          >
+            <span className="grid h-9 w-9 place-items-center rounded-xl bg-[linear-gradient(145deg,#1d4ed8,#3f74ff)] text-xs text-white">
+              DM
+            </span>
+            <span className="text-sm">Diego Mojica</span>
+          </a>
+
+          <button
+            type="button"
+            onClick={() => setMenuOpen((prev) => !prev)}
+            className="grid h-11 w-11 place-items-center rounded-xl border border-[var(--border)] md:hidden"
+            aria-label="Abrir menu"
+          >
+            {menuOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
+
+          <nav
+            className={`absolute left-[4%] top-20 w-[92%] rounded-2xl border border-[var(--border)] bg-white p-4 shadow-[0_14px_28px_rgba(12,34,74,0.12)] md:static md:flex md:w-auto md:items-center md:gap-4 md:border-0 md:bg-transparent md:p-0 md:shadow-none ${menuOpen ? "block" : "hidden md:flex"}`}
+          >
+            {navItems.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className="block rounded-lg px-3 py-2 font-semibold text-[#2a3d61] transition hover:text-[var(--primary)]"
+                onClick={(event) => handleNavClick(event, item.href)}
+              >
+                {item.label}
+              </a>
+            ))}
+            <Button size="sm" asChild>
+              <a href="#contacto" onClick={() => setMenuOpen(false)}>
+                Hablemos
+              </a>
+            </Button>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section id="inicio" className="relative z-10 pt-10 pb-14 md:pt-14 md:pb-16">
+          <div className="mx-auto grid w-[min(1180px,92%)] gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
+            <div className="reveal">
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#bcd0ff] bg-[#eef4ff] px-3 py-1.5">
+                <ShieldCheck size={14} className="text-[var(--primary)]" />
+                <p className="text-xs font-extrabold uppercase tracking-[0.06em] text-[var(--primary)]">Ingeniero de software</p>
+              </div>
+              <h1 className="max-w-3xl text-[2.35rem] leading-[1.08] font-extrabold md:text-[4rem]">
+                Desarrollo soluciones tecnologicas para crecer negocios con orden y velocidad.
+              </h1>
+              <p className="mt-4 max-w-2xl text-[1.05rem] text-[var(--muted-foreground)]">
+                <span className="font-extrabold text-[#173a89]">Soy Diego Alejandro Mojica Parrado, Ingeniero de Software.</span>{" "}
+                Tengo mas de 3 años de experiencia como programador y me enfoco en construir sitios web,
+                automatizaciones, IA aplicada y sistemas a medida con impacto real.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Button asChild>
+                  <a href="#proyectos">Ver proyecto real</a>
+                </Button>
+                <Button variant="secondary" asChild>
+                  <a href="#contacto">Agendar llamada</a>
+                </Button>
+              </div>
+              <ul className="mt-6 flex flex-wrap gap-5 text-sm font-semibold text-[#354b73]">
+                <li className="relative pl-4 before:absolute before:left-0 before:top-[8px] before:h-2 before:w-2 before:rounded-full before:bg-[var(--primary)]">
+                  Respuesta rapida
+                </li>
+                <li className="relative pl-4 before:absolute before:left-0 before:top-[8px] before:h-2 before:w-2 before:rounded-full before:bg-[var(--primary)]">
+                  Soluciones a medida
+                </li>
+                <li className="relative pl-4 before:absolute before:left-0 before:top-[8px] before:h-2 before:w-2 before:rounded-full before:bg-[var(--primary)]">
+                  Soporte continuo
+                </li>
+              </ul>
+            </div>
+
+            <div className="reveal relative lg:pl-2">
+              <div className="glow-pulse absolute -inset-2 rounded-[30px] bg-[linear-gradient(135deg,rgba(40,93,255,0.35),rgba(8,38,118,0.2))] blur-xl" />
+              <div className="relative overflow-hidden rounded-[24px] bg-[radial-gradient(circle_at_15%_10%,#2e65f0_0%,#1644bf_60%,#143790_100%)] p-4 md:p-5 shadow-[0_20px_42px_rgba(14,35,84,0.24)]">
+                <div className="grid gap-3">
+                  <Card className="overflow-hidden border-white/25 bg-white/95">
+                    <CardContent className="p-3">
+                      <div className="relative overflow-hidden rounded-xl">
+                        {!heroCodeError && (
+                          <img
+                            src="/images/profile/codigo.webp"
+                            alt="Codigo y entorno de trabajo"
+                            className="h-[220px] w-full object-cover md:h-[240px]"
+                            onError={() => setHeroCodeError(true)}
+                          />
+                        )}
+                        {heroCodeError && (
+                          <div className="grid h-[220px] w-full place-items-center bg-[linear-gradient(145deg,#dbe7ff,#b8cdfb)] text-center md:h-[240px]">
+                            <div>
+                              <div className="mx-auto mb-2 grid h-14 w-14 place-items-center rounded-2xl bg-[linear-gradient(145deg,#2457df,#0b2f83)] text-lg font-extrabold text-white shadow-[0_10px_20px_rgba(12,44,128,0.3)]">
+                                DM
+                              </div>
+                              <p className="text-xs font-extrabold text-[#1f438d]">Soluciones de software</p>
+                            </div>
+                          </div>
+                        )}
+                        <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,rgba(8,30,90,0.08),rgba(8,30,90,0.76))] p-3 text-white">
+                          <p className="text-[10px] font-bold uppercase tracking-[0.08em] text-[#d8e5ff]">Enfoque actual</p>
+                          <p className="mt-1 text-sm font-extrabold">Web, app movil, IA y sistemas</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    {heroCapabilities.map((item) => (
+                      <Card key={item.title} className="border-white/25 bg-white/95">
+                        <CardContent className="p-3.5">
+                          <div className="flex items-start gap-2.5">
+                            <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-[#edf3ff] text-[var(--primary)]">
+                              <item.icon size={15} />
+                            </span>
+                            <div className="min-w-0">
+                              <p className="text-sm font-extrabold text-[#1e355e]">{item.title}</p>
+                              <p className="mt-0.5 text-sm text-[#4f6285]">{item.text}</p>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="relative z-10 border-y border-[var(--border)] bg-white/70">
+          <div className="mx-auto grid min-h-[76px] w-[min(1120px,92%)] gap-3 py-3 text-center sm:grid-cols-2 lg:grid-cols-4">
+            {trustPills.map((item) => (
+              <p key={item} className="reveal my-auto text-sm font-bold text-[#344f7d]">
+                {item}
+              </p>
+            ))}
+          </div>
+        </section>
+
+        <section id="servicios" className="relative z-10 py-20 md:py-24">
+          <div className="mx-auto w-[min(1280px,94%)]">
+            <div className="reveal mb-8 max-w-3xl">
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.04em] text-[var(--primary)]">Servicios</p>
+              <h2 className="text-3xl font-extrabold md:text-4xl">Oferta clara, enfocada en resultado de negocio</h2>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+              {services.map((service) => (
+                <Card
+                  key={service.title}
+                  className="reveal flex h-full flex-col overflow-hidden transition hover:-translate-y-1 hover:shadow-[0_18px_36px_rgba(12,34,74,0.12)]"
+                >
+                  <div className="relative h-36 w-full overflow-hidden bg-[linear-gradient(145deg,#dfe9ff,#c2d7ff)]">
+                    <img
+                      src={service.image}
+                      alt={`Imagen de ${service.title}`}
+                      className="h-full w-full object-cover transition duration-500 hover:scale-105"
+                    />
+                  </div>
+
+                  <CardHeader className="pb-3">
+                    <div className="mb-1 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#edf3ff] text-[var(--primary)]">
+                      <service.icon size={18} />
+                    </div>
+                    <CardTitle className="leading-snug">{service.title}</CardTitle>
+                    <CardDescription className="leading-7">{service.description}</CardDescription>
+                  </CardHeader>
+                  <CardContent className="mt-auto pt-0">
+                    <ul className="ml-4 list-disc space-y-1 text-sm text-[#344f7d]">
+                      {service.benefits.map((benefit) => (
+                        <li key={benefit}>{benefit}</li>
+                      ))}
+                    </ul>
+                    <a href="#contacto" className="mt-3 inline-block text-sm font-bold text-[var(--primary)]">
+                      Mas informacion
+                    </a>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="proyectos" className="relative z-10 bg-[var(--muted)] py-20 md:py-24">
+          <div className="mx-auto w-[min(1120px,92%)]">
+            <div className="reveal mb-8 max-w-3xl">
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.04em] text-[var(--primary)]">Proyectos</p>
+              <h2 className="text-3xl font-extrabold md:text-4xl">Proyecto comercial publicado</h2>
+              <p className="mt-2 text-[var(--muted-foreground)]">
+                Actualmente este es mi proyecto vendido y publicado. Estoy abierto a nuevos proyectos para ampliar el
+                portafolio con mas casos de negocio.
+              </p>
+            </div>
+
+            <Card className="reveal overflow-hidden">
+              <div className="grid gap-0 lg:grid-cols-[0.45fr_0.55fr]">
+                <div className="relative min-h-[250px] overflow-hidden bg-[linear-gradient(135deg,#2457df,#0b2f83)]">
+                  {!projectImageError && (
+                    <img
+                      src="/images/projects/ecografias-home.webp"
+                      alt="Captura del sitio Ecografias del Llano"
+                      className="h-full w-full object-cover opacity-90"
+                      onError={() => setProjectImageError(true)}
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,26,73,0.22),rgba(9,26,73,0.64))]" />
+                  <div className="absolute left-5 top-5 inline-flex h-14 w-14 items-center justify-center rounded-full bg-white/90 text-sm font-extrabold text-[#1b45a2]">
+                    EDL
+                  </div>
+                  <div className="absolute bottom-5 left-5 right-5 text-white">
+                    <p className="text-xs font-semibold uppercase tracking-[0.08em] text-[#dbe7ff]">Sitio web corporativo</p>
+                    <h3 className="mt-2 text-2xl font-extrabold">Ecografias del Llano</h3>
+                    {projectImageError && (
+                      <p className="mt-2 text-sm text-[#d7e3ff]">
+                        Coloca una captura en /public/images/projects/ecografias-home.webp
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <div className="p-6 md:p-8">
+                  <p className="text-sm font-bold text-[var(--primary)]">Problema</p>
+                  <p className="mt-1 text-[var(--muted-foreground)]">
+                    Necesidad de presencia digital profesional y canal claro para que pacientes encontraran servicios e
+                    informacion de contacto.
+                  </p>
+                  <p className="mt-4 text-sm font-bold text-[var(--primary)]">Solucion</p>
+                  <p className="mt-1 text-[var(--muted-foreground)]">
+                    Diseño y desarrollo de sitio web orientado a confianza, claridad de servicios medicos y facilidad
+                    de contacto.
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <Badge>HTML</Badge>
+                    <Badge>CSS</Badge>
+                    <Badge>JavaScript</Badge>
+                  </div>
+                  <div className="mt-5 flex flex-wrap gap-3">
+                    <Button asChild>
+                      <a href="https://www.ecografiasdelllano.com/" target="_blank" rel="noreferrer">
+                        Ver sitio en vivo
+                      </a>
+                    </Button>
+                    <Button variant="secondary" asChild>
+                      <a href="#contacto">Quiero un proyecto similar</a>
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </section>
+
+        <section className="relative z-10 bg-[linear-gradient(145deg,#0f2f84,#09215f)] py-20 md:py-24">
+          <div className="mx-auto w-[min(1120px,92%)]">
+            <div className="reveal mb-8 max-w-3xl">
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.04em] text-[#9cb8ff]">Beneficios</p>
+              <h2 className="text-3xl font-extrabold text-white md:text-4xl">Lo que gana tu negocio al trabajar conmigo</h2>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+              {benefits.map((benefit, index) => {
+                const icons = [ShieldCheck, Handshake, Cog, ChartNoAxesColumn];
+                const Icon = icons[index];
+                return (
+                  <Card key={benefit.title} className="reveal bg-white">
+                    <CardHeader>
+                      <div className="mb-1 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#edf3ff] text-[var(--primary)]">
+                        <Icon size={18} />
+                      </div>
+                      <CardTitle>{benefit.title}</CardTitle>
+                      <CardDescription>{benefit.text}</CardDescription>
+                    </CardHeader>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section id="sobre-mi" className="relative z-10 py-20 md:py-24">
+          <div className="mx-auto grid w-[min(1120px,92%)] gap-5 md:grid-cols-[0.84fr_1.16fr] md:items-center">
+            <div className="reveal rounded-[24px] bg-[linear-gradient(170deg,#0d388f,#1751ce)] p-7 text-white shadow-[0_18px_46px_rgba(10,28,58,0.16)]">
+              <div className="mb-4 grid h-[74px] w-[74px] place-items-center rounded-[18px] bg-white/20 text-xl font-extrabold">
+                DM
+              </div>
+              <h3 className="text-xl font-extrabold">Diego Alejandro Mojica Parrado</h3>
+              <p className="mt-1 text-white/90">Ingeniero de software</p>
+            </div>
+
+            <div className="reveal">
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.04em] text-[var(--primary)]">Sobre mi</p>
+              <h2 className="text-3xl font-extrabold md:text-4xl">
+                Construyo tecnologia con enfoque tecnico y vision de negocio
+              </h2>
+              <p className="mt-4 text-[var(--muted-foreground)]">
+                Me enfoco en crear soluciones digitales que ayuden a negocios a mejorar su presencia, optimizar
+                procesos y atender mejor a sus clientes. Combino desarrollo solido con implementacion pragmatica.
+              </p>
+              <p className="mt-2 text-[var(--muted-foreground)]">
+                Tengo mas de 3 años de experiencia profesional en una empresa de software, participando en creacion,
+                mantenimiento y mejora de sistemas para salud, costos, servicios publicos, correspondencia, hoteles y
+                sitios web corporativos.
+              </p>
+
+              <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                <Card className="bg-[#f3f8ff]">
+                  <CardContent className="p-4">
+                    <p className="text-sm font-extrabold text-[var(--secondary-foreground)]">3+ años</p>
+                    <p className="text-xs text-[#47608b]">Experiencia profesional</p>
+                  </CardContent>
+                </Card>
+                <Card className="bg-[#f3f8ff]">
+                  <CardContent className="p-4">
+                    <p className="text-sm font-extrabold text-[var(--secondary-foreground)]">Sectores reales</p>
+                    <p className="text-xs text-[#47608b]">Salud, hoteles, servicios publicos y mas</p>
+                  </CardContent>
+                </Card>
+                <Card className="bg-[#f3f8ff]">
+                  <CardContent className="p-4">
+                    <p className="text-sm font-extrabold text-[var(--secondary-foreground)]">Mantenimiento</p>
+                    <p className="text-xs text-[#47608b]">Mejora continua de sistemas productivos</p>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="relative z-10 bg-[var(--muted)] py-20 md:py-24">
+          <div className="mx-auto w-[min(1120px,92%)]">
+            <div className="reveal mb-8 max-w-3xl">
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.04em] text-[var(--primary)]">Tecnologias</p>
+              <h2 className="text-3xl font-extrabold md:text-4xl">Stack organizado para soluciones robustas</h2>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {techGroups.map((group) => (
+                <Card key={group.title} className="reveal">
+                  <CardHeader>
+                    <div className="mb-1 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-[#edf3ff] text-[var(--primary)]">
+                      <group.icon size={18} />
+                    </div>
+                    <CardTitle>{group.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-wrap gap-2">
+                      {group.items.map((item) => (
+                        <Badge key={item}>{item}</Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="relative z-10 py-20 md:py-24">
+          <div className="mx-auto w-[min(1120px,92%)]">
+            <div className="reveal mb-8 max-w-3xl">
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.04em] text-[var(--primary)]">Proceso de trabajo</p>
+              <h2 className="text-3xl font-extrabold md:text-4xl">Metodologia simple y clara para avanzar sin friccion</h2>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+              {process.map((item) => (
+                <Card key={item.step} className="reveal">
+                  <CardHeader>
+                    <div className="mb-1 grid h-9 w-9 place-items-center rounded-xl bg-[#eaf1ff] font-extrabold text-[var(--secondary-foreground)]">
+                      {item.step}
+                    </div>
+                    <CardTitle>{item.title}</CardTitle>
+                    <CardDescription>{item.text}</CardDescription>
+                  </CardHeader>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="relative z-10 bg-[var(--muted)] py-20 md:py-24">
+          <div className="mx-auto w-[min(1120px,92%)]">
+            <div className="reveal mx-auto mb-8 max-w-3xl text-center">
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.04em] text-[var(--primary)]">Experiencia y confianza</p>
+              <h2 className="text-3xl font-extrabold md:text-4xl">Reseña de cliente real</h2>
+              {/* <p className="mt-2 text-[var(--muted-foreground)]">
+                Caso publicado y activo para Ecografias del Llano.
+              </p> */}
+            </div>
+            <div className="mx-auto max-w-3xl">
+              {testimonials.map((item) => (
+                <Card
+                  key={item.quote}
+                  className={`reveal text-center ${item.featured ? "border-[var(--primary)] shadow-[0_16px_38px_rgba(29,78,216,0.12)]" : ""}`}
+                >
+                  <CardContent className="p-7 md:p-9">
+                    <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#bcd0ff] bg-[#edf3ff] px-3 py-1 text-xs font-extrabold uppercase tracking-[0.05em] text-[var(--primary)]">
+                      <ShieldCheck size={14} />
+                      Cliente verificado
+                    </div>
+                    <p className="text-lg font-semibold leading-8 text-[#26406d]">"{item.quote}"</p>
+                    <p className="mt-5 text-base font-extrabold text-[var(--primary)]">{item.author}</p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.05em] text-[var(--muted-foreground)]">{item.role}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="relative z-10 bg-[linear-gradient(145deg,#f7fbff,#eaf2ff)] py-20 md:py-24">
+          <div className="mx-auto w-[min(1120px,92%)]">
+            <Card className="reveal rounded-[22px] p-7">
+              <h2 className="text-3xl font-extrabold">
+                Si tu negocio necesita una web profesional, automatizar procesos o implementar soluciones tecnologicas,
+                hablemos.
+              </h2>
+              <div className="mt-5 flex flex-wrap gap-3">
+                <Button asChild>
+                  <a href="https://wa.me/573228441820?text=Hola%20Diego%2C%20quiero%20informacion%20sobre%20un%20proyecto." target="_blank" rel="noreferrer">
+                    Escribirme por WhatsApp
+                  </a>
+                </Button>
+                <Button variant="secondary" asChild>
+                  <a href="#servicios">Ver servicios</a>
+                </Button>
+              </div>
+            </Card>
+          </div>
+        </section>
+
+        <section id="contacto" className="relative z-10 py-20 md:py-24">
+          <div className="mx-auto grid w-[min(1120px,92%)] gap-5 lg:grid-cols-2">
+            <div className="reveal">
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.04em] text-[var(--primary)]">Contacto</p>
+              <h2 className="text-3xl font-extrabold md:text-4xl">Conversemos sobre tu proyecto</h2>
+              <p className="mt-3 text-[var(--muted-foreground)]">
+                Cuentame que necesitas y te respondo con un enfoque claro de solucion, alcance y siguientes pasos.
+              </p>
+
+              <ul className="mt-4 space-y-3">
+                {contactItems.map((item) => (
+                  <li key={item.label}>
+                    <a
+                      href={item.href}
+                      target={item.href.startsWith("http") ? "_blank" : undefined}
+                      rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+                      className="group flex items-center gap-3 rounded-xl border border-[var(--border)] bg-white px-3 py-2 transition hover:border-[var(--primary)] hover:bg-[#f4f8ff]"
+                    >
+                      <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#edf3ff] text-[var(--primary)]">
+                        <item.icon size={17} />
+                      </span>
+                      <span>
+                        <span className="block text-sm font-semibold text-[#2f446a]">{item.label}</span>
+                        <span className="text-sm font-bold text-[var(--primary)]">{item.value}</span>
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <Card className="reveal">
+              <CardContent className="space-y-3 p-5">
+                <form onSubmit={handleFormSubmit} className="space-y-3">
+                  <label className="block text-sm font-semibold text-[#27416a]">
+                    Nombre
+                    <input
+                      required
+                      name="nombre"
+                      type="text"
+                      value={formData.nombre}
+                      onChange={handleFormChange}
+                      placeholder="Tu nombre"
+                      className="mt-1 w-full rounded-xl border border-[#c9d7ef] px-3 py-3 outline-none focus:border-[#79a2ff] focus:ring-2 focus:ring-[rgba(29,78,216,0.2)]"
+                    />
+                  </label>
+                  <label className="block text-sm font-semibold text-[#27416a]">
+                    Correo
+                    <input
+                      required
+                      name="correo"
+                      type="email"
+                      value={formData.correo}
+                      onChange={handleFormChange}
+                      placeholder="tu@email.com"
+                      className="mt-1 w-full rounded-xl border border-[#c9d7ef] px-3 py-3 outline-none focus:border-[#79a2ff] focus:ring-2 focus:ring-[rgba(29,78,216,0.2)]"
+                    />
+                  </label>
+                  <label className="block text-sm font-semibold text-[#27416a]">
+                    Mensaje
+                    <textarea
+                      required
+                      name="mensaje"
+                      value={formData.mensaje}
+                      onChange={handleFormChange}
+                      rows="5"
+                      placeholder="Cuentame sobre tu proyecto"
+                      className="mt-1 w-full rounded-xl border border-[#c9d7ef] px-3 py-3 outline-none focus:border-[#79a2ff] focus:ring-2 focus:ring-[rgba(29,78,216,0.2)]"
+                    />
+                  </label>
+                  <Button type="submit" className="w-full" disabled={isSubmitting}>
+                    <Send size={16} />
+                    {isSubmitting ? "Enviando..." : "Enviar mensaje"}
+                  </Button>
+                </form>
+                {formNotice.text && (
+                  <div
+                    className={`rounded-xl border px-3 py-2 text-sm font-semibold ${
+                      formNotice.type === "success"
+                        ? "border-emerald-300 bg-emerald-50 text-emerald-700"
+                        : "border-rose-300 bg-rose-50 text-rose-700"
+                    }`}
+                  >
+                    {formNotice.text}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+      </main>
+
+      <footer className="relative z-10 border-t border-[var(--border)] bg-white">
+        <div className="mx-auto grid min-h-[112px] w-[min(1120px,92%)] gap-4 py-6 md:grid-cols-[1.2fr_1fr_auto] md:items-center">
+          <div>
+            <p className="font-extrabold">Diego Alejandro Mojica Parrado</p>
+            <p className="text-sm text-[var(--muted-foreground)]">
+              Ingeniero de Software. Soluciones tecnolÃ³gicas para negocios.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            {navItems.map((item) => (
+              <a key={item.label} href={item.href} className="text-sm font-semibold text-[#3b5682]">
+                {item.label}
+              </a>
+            ))}
+          </div>
+          <p className="text-sm text-[var(--muted-foreground)]">Â© {year} Diego Mojica</p>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+export default App;
+

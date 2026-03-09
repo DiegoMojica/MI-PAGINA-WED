@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #09162c;
+  --card: #ffffff;
+  --card-foreground: #09162c;
+  --primary: #1d4ed8;
+  --primary-foreground: #ffffff;
+  --secondary: #eef4ff;
+  --secondary-foreground: #123794;
+  --muted: #f3f7ff;
+  --muted-foreground: #4f5f79;
+  --border: #d8e3f5;
+  --ring: #a9c4ff;
+  --radius: 0.9rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Manrope", "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+  color: var(--foreground);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes floatY {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.65;
+  }
+}
+
+.float-card-a {
+  animation: floatY 6s ease-in-out infinite;
+}
+
+.float-card-b {
+  animation: floatY 7s ease-in-out infinite;
+}
+
+.glow-pulse {
+  animation: glowPulse 4s ease-in-out infinite;
+}
