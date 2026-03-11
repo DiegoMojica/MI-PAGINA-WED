@@ -456,6 +456,11 @@ function App() {
                           <img
                             src="/images/profile/codigo.webp"
                             alt="Codigo y entorno de trabajo"
+                            width="1280"
+                            height="720"
+                            loading="eager"
+                            fetchPriority="high"
+                            decoding="async"
                             className="h-[220px] w-full object-cover md:h-[240px]"
                             onError={() => setHeroCodeError(true)}
                           />
@@ -527,6 +532,10 @@ function App() {
                     <img
                       src={service.image}
                       alt={`Imagen de ${service.title}`}
+                      width="640"
+                      height="360"
+                      loading="lazy"
+                      decoding="async"
                       className="h-full w-full object-cover transition duration-500 hover:scale-105"
                     />
                   </div>
@@ -572,6 +581,10 @@ function App() {
                     <img
                       src="/images/projects/ecografias-home.webp"
                       alt="Captura del sitio Ecografias del Llano"
+                      width="1280"
+                      height="720"
+                      loading="lazy"
+                      decoding="async"
                       className="h-full w-full object-cover opacity-90"
                       onError={() => setProjectImageError(true)}
                     />
