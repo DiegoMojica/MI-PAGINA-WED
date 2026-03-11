@@ -34,58 +34,58 @@ const navItems = [
 
 const services = [
   {
-    title: "Paginas Web",
+    title: "Páginas Web",
     description: "Presencia profesional para captar clientes y mejorar la credibilidad digital.",
     icon: Globe,
     image: "/images/services/web-corporativa.webp",
     imageHint: "web corporativa moderna, dashboard y laptop",
-    benefits: ["Diseno responsive", "Carga rapida", "SEO tecnico base", "Enfoque comercial"],
+    benefits: ["Diseño responsive", "Carga rápida", "SEO técnico base", "Enfoque comercial"],
   },
   {
-    title: "Automatizacion",
-    description: "Procesos mas agiles, menos tareas manuales y menos errores operativos.",
+    title: "Automatización",
+    description: "Procesos más ágiles, menos tareas manuales y menos errores operativos.",
     icon: Cog,
     image: "/images/services/automatizacion-procesos.webp",
     imageHint: "flujo automatizado de negocio, integraciones y datos",
-    benefits: ["Flujos automaticos", "Integraciones", "Alertas y reportes", "Estandarizacion"],
+    benefits: ["Flujos automáticos", "Integraciones", "Alertas y reportes", "Estandarización"],
   },
   {
     title: "IA para Negocios",
-    description: "Atencion y clasificacion inteligente para responder mas rapido y mejor.",
+    description: "Atención y clasificación inteligente para responder más rápido y mejor.",
     icon: Bot,
     image: "/images/services/ia-negocios.webp",
-    imageHint: "asistente IA para atencion al cliente empresarial",
-    benefits: ["Asistentes virtuales", "Filtro de leads", "Respuestas rapidas", "Mejor experiencia"],
+    imageHint: "asistente IA para atención al cliente empresarial",
+    benefits: ["Asistentes virtuales", "Filtro de leads", "Respuestas rápidas", "Mejor experiencia"],
   },
   {
     title: "Sistemas a Medida",
-    description: "Herramientas internas para controlar operacion y escalar con orden.",
+    description: "Herramientas internas para controlar operación y escalar con orden.",
     icon: LayoutPanelTop,
     image: "/images/services/sistema-medida.webp",
     imageHint: "sistema interno empresarial, panel administrativo",
     benefits: ["Paneles internos", "Control de procesos", "Roles y permisos", "Escalabilidad"],
   },
   {
-    title: "Aplicaciones Moviles",
-    description: "Desarrollo de apps moviles para Android y soluciones multiplataforma.",
+    title: "Aplicaciones Móviles",
+    description: "Desarrollo de apps móviles para Android y soluciones multiplataforma.",
     icon: MonitorSmartphone,
     image: "/images/services/aplicaciones-moviles.webp",
-    imageHint: "aplicaciones moviles, smartphone con interfaz moderna",
-    benefits: ["Apps Android", "Flutter y Dart", "Integracion con APIs", "Publicacion y soporte"],
+    imageHint: "aplicaciones móviles, smartphone con interfaz moderna",
+    benefits: ["Apps Android", "Flutter y Dart", "Integración con APIs", "Publicación y soporte"],
   },
 ];
 
 const benefits = [
   { title: "Imagen profesional", text: "Tu negocio transmite seriedad desde el primer contacto." },
-  { title: "Atencion mas rapida", text: "Flujos digitales que acortan tiempos de respuesta." },
+  { title: "Atención más rápida", text: "Flujos digitales que acortan tiempos de respuesta." },
   { title: "Menos trabajo manual", text: "Automatizaciones para eliminar tareas repetitivas." },
   { title: "Mejor control interno", text: "Datos y procesos centralizados para decidir mejor." },
 ];
 
 const process = [
   { step: "1", title: "Entiendo el problema", text: "Alineo objetivos, contexto y prioridad de negocio." },
-  { step: "2", title: "Diseno la solucion", text: "Defino alcance, arquitectura y flujo funcional." },
-  { step: "3", title: "Desarrollo e implemento", text: "Construyo de forma iterativa con validaciones tecnicas." },
+  { step: "2", title: "Diseño la solución", text: "Defino alcance, arquitectura y flujo funcional." },
+  { step: "3", title: "Desarrollo e implemento", text: "Construyo de forma iterativa con validaciones técnicas." },
   { step: "4", title: "Entrego y doy soporte", text: "Realizo ajustes post-entrega y mejora continua." },
 ];
 
@@ -111,7 +111,7 @@ const techGroups = [
     items: ["Java", "Android", "Dart", "Flutter"],
   },
   {
-    title: "Automatizacion",
+    title: "Automatización",
     icon: Sparkles,
     items: ["Webhooks", "Bots", "Integraciones", "WhatsApp API", "Email workflows"],
   },
@@ -123,26 +123,26 @@ const techGroups = [
 ];
 
 const trustPills = [
-  "Escalar + via tecnologica",
+  "Escalar + vía tecnológica",
   "Software a medida para negocios",
-  "Web y apps moviles",
-  "Automatizacion y soporte continuo",
+  "Web y apps móviles",
+  "Automatización y soporte continuo",
 ];
 
 const heroCapabilities = [
   {
     title: "Web comercial",
-    text: "Captacion y confianza.",
+    text: "Captación y confianza.",
     icon: Globe,
   },
   {
-    title: "App movil",
+    title: "App móvil",
     text: "Android y Flutter.",
     icon: MonitorSmartphone,
   },
   {
     title: "IA aplicada",
-    text: "Respuestas mas rapidas.",
+    text: "Respuestas más rápidas.",
     icon: Bot,
   },
   {
@@ -155,9 +155,9 @@ const heroCapabilities = [
 const testimonials = [
   {
     quote:
-      "Escalvia entendio exactamente lo que necesitabamos y entrego una web clara, profesional y facil de usar. Lo recomendamos totalmente para proyectos digitales serios.",
-    author: "Ecografias del Llano",
-    role: "Cliente Escalvia - Sitio en produccion",
+      "Escalvia entendió exactamente lo que necesitábamos y entregó una web clara, profesional y fácil de usar. Lo recomendamos totalmente para proyectos digitales serios.",
+    author: "Ecografías del Llano",
+    role: "Cliente Escalvia - Sitio en producción",
     featured: true,
   },
 ];
@@ -184,7 +184,7 @@ const contactItems = [
   {
     label: "WhatsApp",
     value: "322 844 1820",
-    href: "https://wa.me/573228441820?text=Hola%20Escalvia%2C%20quiero%20informacion%20sobre%20un%20proyecto.",
+    href: "https://wa.me/573228441820?text=Hola%20Escalvia%2C%20quiero%20informaci%C3%B3n%20sobre%20un%20proyecto.",
     icon: MessageCircle,
   },
 ];
@@ -259,7 +259,7 @@ function App() {
     if (formData.website.trim() !== "") {
       setFormNotice({
         type: "success",
-        text: "Mensaje enviado correctamente. Te respondere pronto.",
+        text: "Mensaje enviado correctamente. Te responderé pronto.",
       });
       return;
     }
@@ -287,7 +287,7 @@ function App() {
     if (cleanNombre.length < 3 || cleanNombre.length > 80) {
       setFormNotice({
         type: "error",
-        text: "Ingresa un nombre valido (entre 3 y 80 caracteres).",
+        text: "Ingresa un nombre válido (entre 3 y 80 caracteres).",
       });
       return;
     }
@@ -295,7 +295,7 @@ function App() {
     if (!EMAIL_PATTERN.test(cleanCorreo)) {
       setFormNotice({
         type: "error",
-        text: "Ingresa un correo valido.",
+        text: "Ingresa un correo válido.",
       });
       return;
     }
@@ -342,7 +342,7 @@ function App() {
       });
       setFormNotice({
         type: "success",
-        text: "Mensaje enviado correctamente. Te respondere pronto.",
+        text: "Mensaje enviado correctamente. Te responderé pronto.",
       });
     } catch {
       setFormNotice({
@@ -372,7 +372,7 @@ function App() {
             <span className="leading-tight">
               <span className="block text-sm">Escalvia</span>
               <span className="hidden text-[10px] font-bold tracking-[0.08em] text-[#4b6187] sm:block">
-                ESCALAR + VIA TECNOLOGICA
+                ESCALAR + VÍA TECNOLÓGICA
               </span>
             </span>
           </a>
@@ -381,7 +381,7 @@ function App() {
             type="button"
             onClick={() => setMenuOpen((prev) => !prev)}
             className="grid h-11 w-11 place-items-center rounded-xl border border-[var(--border)] md:hidden"
-            aria-label="Abrir menu"
+            aria-label="Abrir menú"
           >
             {menuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
@@ -417,12 +417,12 @@ function App() {
                 <p className="text-xs font-extrabold uppercase tracking-[0.06em] text-[var(--primary)]">Escalvia | Software para escalar negocios</p>
               </div>
               <h1 className="max-w-3xl text-[2.35rem] leading-[1.08] font-extrabold md:text-[4rem]">
-                Creamos la via tecnologica para escalar negocios con software, web y automatizacion.
+                Creamos la vía tecnológica para escalar negocios con software, web y automatización.
               </h1>
               <p className="mt-4 max-w-2xl text-[1.05rem] text-[var(--muted-foreground)]">
-                <span className="font-extrabold text-[#173a89]">Escalvia significa escalar + via.</span>{" "}
-                Soy Diego Mojica, fundador de la marca, y ayudo a negocios a crecer con tecnologia practica:
-                paginas web, aplicaciones, automatizacion e IA aplicada.
+                <span className="font-extrabold text-[#173a89]">Escalvia significa escalar + vía.</span>{" "}
+                Soy Diego Mojica, fundador de la marca, y ayudo a negocios a crecer con tecnología práctica:
+                páginas web, aplicaciones, automatización e IA aplicada.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Button asChild>
@@ -434,7 +434,7 @@ function App() {
               </div>
               <ul className="mt-6 flex flex-wrap gap-5 text-sm font-semibold text-[#354b73]">
                 <li className="relative pl-4 before:absolute before:left-0 before:top-[8px] before:h-2 before:w-2 before:rounded-full before:bg-[var(--primary)]">
-                  Respuesta rapida
+                  Respuesta rápida
                 </li>
                 <li className="relative pl-4 before:absolute before:left-0 before:top-[8px] before:h-2 before:w-2 before:rounded-full before:bg-[var(--primary)]">
                   Soluciones a medida
@@ -455,7 +455,7 @@ function App() {
                         {!heroCodeError && (
                           <img
                             src="/images/profile/codigo.webp"
-                            alt="Codigo y entorno de trabajo"
+                            alt="Código y entorno de trabajo"
                             width="1280"
                             height="720"
                             loading="eager"
@@ -471,13 +471,13 @@ function App() {
                               <div className="mx-auto mb-2 grid h-14 w-14 place-items-center rounded-2xl bg-[linear-gradient(145deg,#2457df,#0b2f83)] text-lg font-extrabold text-white shadow-[0_10px_20px_rgba(12,44,128,0.3)]">
                                 EV
                               </div>
-                              <p className="text-xs font-extrabold text-[#1f438d]">Via tecnologica para negocios</p>
+                              <p className="text-xs font-extrabold text-[#1f438d]">Vía tecnológica para negocios</p>
                             </div>
                           </div>
                         )}
                         <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,rgba(8,30,90,0.08),rgba(8,30,90,0.76))] p-3 text-white">
                           <p className="text-[10px] font-bold uppercase tracking-[0.08em] text-[#d8e5ff]">Enfoque actual</p>
-                          <p className="mt-1 text-sm font-extrabold">Web, app movil, IA y sistemas</p>
+                          <p className="mt-1 text-sm font-extrabold">Web, app móvil, IA y sistemas</p>
                         </div>
                       </div>
                     </CardContent>
@@ -554,7 +554,7 @@ function App() {
                       ))}
                     </ul>
                     <a href="#contacto" className="mt-3 inline-block text-sm font-bold text-[var(--primary)]">
-                      Mas informacion
+                      Más información
                     </a>
                   </CardContent>
                 </Card>
@@ -570,7 +570,7 @@ function App() {
               <h2 className="text-3xl font-extrabold md:text-4xl">Proyecto comercial publicado</h2>
               <p className="mt-2 text-[var(--muted-foreground)]">
                 Actualmente este es mi proyecto vendido y publicado. Estoy abierto a nuevos proyectos para ampliar el
-                portafolio con mas casos de negocio.
+                portafolio con más casos de negocio.
               </p>
             </div>
 
@@ -580,7 +580,7 @@ function App() {
                   {!projectImageError && (
                     <img
                       src="/images/projects/ecografias-home.webp"
-                      alt="Captura del sitio Ecografias del Llano"
+                      alt="Captura del sitio Ecografías del Llano"
                       width="1280"
                       height="720"
                       loading="lazy"
@@ -595,7 +595,7 @@ function App() {
                   </div>
                   <div className="absolute bottom-5 left-5 right-5 text-white">
                     <p className="text-xs font-semibold uppercase tracking-[0.08em] text-[#dbe7ff]">Sitio web corporativo</p>
-                    <h3 className="mt-2 text-2xl font-extrabold">Ecografias del Llano</h3>
+                    <h3 className="mt-2 text-2xl font-extrabold">Ecografías del Llano</h3>
                     {projectImageError && (
                       <p className="mt-2 text-sm text-[#d7e3ff]">
                         Coloca una captura en /public/images/projects/ecografias-home.webp
@@ -606,13 +606,13 @@ function App() {
                 <div className="p-6 md:p-8">
                   <p className="text-sm font-bold text-[var(--primary)]">Problema</p>
                   <p className="mt-1 text-[var(--muted-foreground)]">
-                    Necesidad de presencia digital profesional y canal claro para que pacientes encontraran servicios e
-                    informacion de contacto.
+                    La página que tenían estaba desactualizada; querían una mejor presentación y que fuera adaptable a
+                    todo tipo de tamaños de pantalla.
                   </p>
-                  <p className="mt-4 text-sm font-bold text-[var(--primary)]">Solucion</p>
+                  <p className="mt-4 text-sm font-bold text-[var(--primary)]">Solución</p>
                   <p className="mt-1 text-[var(--muted-foreground)]">
-                    Diseno y desarrollo de sitio web orientado a confianza, claridad de servicios medicos y facilidad
-                    de contacto.
+                    Diseño y desarrollo de un sitio web moderno, con presentación profesional, claridad de servicios
+                    médicos y diseño responsive para cualquier dispositivo.
                   </p>
                   <div className="mt-4 flex flex-wrap gap-2">
                     <Badge>HTML</Badge>
@@ -668,34 +668,34 @@ function App() {
                 EV
               </div>
               <h3 className="text-xl font-extrabold">Escalvia</h3>
-              <p className="mt-1 text-white/90">Fundada por Diego Mojica | Ingenieria de software aplicada</p>
+              <p className="mt-1 text-white/90">Fundada por Diego Mojica | Ingeniería de software aplicada</p>
             </div>
 
             <div className="reveal">
               <p className="mb-2 text-xs font-bold uppercase tracking-[0.04em] text-[var(--primary)]">Sobre Escalvia</p>
               <h2 className="text-3xl font-extrabold md:text-4xl">
-                Tecnologia con enfoque tecnico y vision de negocio
+                Tecnología con enfoque técnico y visión de negocio
               </h2>
               <p className="mt-4 text-[var(--muted-foreground)]">
                 Escalvia nace para resolver problemas reales de negocio con una ruta clara: analizar, construir y
                 escalar. Cada proyecto prioriza impacto comercial y facilidad de uso.
               </p>
               <p className="mt-2 text-[var(--muted-foreground)]">
-                Soy Diego Mojica y tengo mas de 3 anos de experiencia profesional construyendo y mejorando sistemas
+                Soy Diego Mojica y tengo más de 3 años de experiencia profesional construyendo y mejorando sistemas
                 para salud, hoteles, servicios y sitios web corporativos.
               </p>
 
               <div className="mt-4 grid gap-3 sm:grid-cols-3">
                 <Card className="bg-[#f3f8ff]">
                   <CardContent className="p-4">
-                    <p className="text-sm font-extrabold text-[var(--secondary-foreground)]">3+ anos</p>
+                    <p className="text-sm font-extrabold text-[var(--secondary-foreground)]">3+ años</p>
                     <p className="text-xs text-[#47608b]">Experiencia profesional</p>
                   </CardContent>
                 </Card>
                 <Card className="bg-[#f3f8ff]">
                   <CardContent className="p-4">
                     <p className="text-sm font-extrabold text-[var(--secondary-foreground)]">Sectores reales</p>
-                    <p className="text-xs text-[#47608b]">Salud, hoteles, servicios publicos y mas</p>
+                    <p className="text-xs text-[#47608b]">Salud, hoteles, servicios públicos y más</p>
                   </CardContent>
                 </Card>
                 <Card className="bg-[#f3f8ff]">
@@ -712,7 +712,7 @@ function App() {
         <section className="relative z-10 bg-[var(--muted)] py-20 md:py-24">
           <div className="mx-auto w-[min(1120px,92%)]">
             <div className="reveal mb-8 max-w-3xl">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.04em] text-[var(--primary)]">Tecnologias</p>
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.04em] text-[var(--primary)]">Tecnologías</p>
               <h2 className="text-3xl font-extrabold md:text-4xl">Stack organizado para soluciones robustas</h2>
             </div>
 
@@ -742,7 +742,7 @@ function App() {
           <div className="mx-auto w-[min(1120px,92%)]">
             <div className="reveal mb-8 max-w-3xl">
               <p className="mb-2 text-xs font-bold uppercase tracking-[0.04em] text-[var(--primary)]">Proceso de trabajo</p>
-              <h2 className="text-3xl font-extrabold md:text-4xl">Metodologia simple y clara para avanzar sin friccion</h2>
+              <h2 className="text-3xl font-extrabold md:text-4xl">Metodología simple y clara para avanzar sin fricción</h2>
             </div>
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
               {process.map((item) => (
@@ -764,9 +764,9 @@ function App() {
           <div className="mx-auto w-[min(1120px,92%)]">
             <div className="reveal mx-auto mb-8 max-w-3xl text-center">
               <p className="mb-2 text-xs font-bold uppercase tracking-[0.04em] text-[var(--primary)]">Experiencia y confianza</p>
-              <h2 className="text-3xl font-extrabold md:text-4xl">Resena de cliente real</h2>
+              <h2 className="text-3xl font-extrabold md:text-4xl">Reseña de cliente real</h2>
               {/* <p className="mt-2 text-[var(--muted-foreground)]">
-                Caso publicado y activo para Ecografias del Llano.
+                Caso publicado y activo para Ecografías del Llano.
               </p> */}
             </div>
             <div className="mx-auto max-w-3xl">
@@ -794,12 +794,12 @@ function App() {
           <div className="mx-auto w-[min(1120px,92%)]">
             <Card className="reveal rounded-[22px] p-7">
               <h2 className="text-3xl font-extrabold">
-                En Escalvia creamos la via tecnologica para escalar tu negocio con software a medida, web, apps y
-                automatizacion.
+                En Escalvia creamos la vía tecnológica para escalar tu negocio con software a medida, web, apps y
+                automatización.
               </h2>
               <div className="mt-5 flex flex-wrap gap-3">
                 <Button asChild>
-                  <a href="https://wa.me/573228441820?text=Hola%20Escalvia%2C%20quiero%20informacion%20sobre%20un%20proyecto." target="_blank" rel="noreferrer">
+                  <a href="https://wa.me/573228441820?text=Hola%20Escalvia%2C%20quiero%20informaci%C3%B3n%20sobre%20un%20proyecto." target="_blank" rel="noreferrer">
                     Hablar con Escalvia por WhatsApp
                   </a>
                 </Button>
@@ -817,7 +817,7 @@ function App() {
               <p className="mb-2 text-xs font-bold uppercase tracking-[0.04em] text-[var(--primary)]">Contacto</p>
               <h2 className="text-3xl font-extrabold md:text-4xl">Conversemos sobre tu proyecto en Escalvia</h2>
               <p className="mt-3 text-[var(--muted-foreground)]">
-                Cuentame que necesitas y te respondo con una propuesta clara: solucion, alcance, tiempos y siguientes
+                Cuéntame qué necesitas y te respondo con una propuesta clara: solución, alcance, tiempos y siguientes
                 pasos.
               </p>
 
@@ -892,7 +892,7 @@ function App() {
                       onChange={handleFormChange}
                       maxLength={MAX_MESSAGE_LENGTH}
                       rows="5"
-                      placeholder="Cuentame sobre tu proyecto"
+                      placeholder="Cuéntame sobre tu proyecto"
                       className="mt-1 w-full rounded-xl border border-[#c9d7ef] px-3 py-3 outline-none focus:border-[#79a2ff] focus:ring-2 focus:ring-[rgba(29,78,216,0.2)]"
                     />
                   </label>
@@ -923,7 +923,7 @@ function App() {
           <div>
             <p className="font-extrabold">Escalvia</p>
             <p className="text-sm text-[var(--muted-foreground)]">
-              Creamos la via tecnologica para escalar negocios.
+              Creamos la vía tecnológica para escalar negocios.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
