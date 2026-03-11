@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Bot,
   ChartNoAxesColumn,
@@ -28,7 +28,7 @@ const navItems = [
   { label: "Inicio", href: "#inicio" },
   { label: "Servicios", href: "#servicios" },
   { label: "Proyectos", href: "#proyectos" },
-  { label: "Sobre mi", href: "#sobre-mi" },
+  { label: "Sobre Escalvia", href: "#sobre-mi" },
   { label: "Contacto", href: "#contacto" },
 ];
 
@@ -84,7 +84,7 @@ const benefits = [
 
 const process = [
   { step: "1", title: "Entiendo el problema", text: "Alineo objetivos, contexto y prioridad de negocio." },
-  { step: "2", title: "Diseño la solucion", text: "Defino alcance, arquitectura y flujo funcional." },
+  { step: "2", title: "Diseno la solucion", text: "Defino alcance, arquitectura y flujo funcional." },
   { step: "3", title: "Desarrollo e implemento", text: "Construyo de forma iterativa con validaciones tecnicas." },
   { step: "4", title: "Entrego y doy soporte", text: "Realizo ajustes post-entrega y mejora continua." },
 ];
@@ -123,10 +123,10 @@ const techGroups = [
 ];
 
 const trustPills = [
-  "Soluciones para negocios",
-  "Desarrollo moderno y responsive",
+  "Escalar + via tecnologica",
+  "Software a medida para negocios",
   "Web y apps moviles",
-  "Soporte y mantenimiento",
+  "Automatizacion y soporte continuo",
 ];
 
 const heroCapabilities = [
@@ -155,9 +155,9 @@ const heroCapabilities = [
 const testimonials = [
   {
     quote:
-      "Diego entendio exactamente lo que necesitabamos y entrego una web clara, profesional y facil de usar. Lo recomendamos totalmente para proyectos digitales serios.",
+      "Escalvia entendio exactamente lo que necesitabamos y entrego una web clara, profesional y facil de usar. Lo recomendamos totalmente para proyectos digitales serios.",
     author: "Ecografias del Llano",
-    role: "Cliente - Sitio en produccion",
+    role: "Cliente Escalvia - Sitio en produccion",
     featured: true,
   },
 ];
@@ -184,10 +184,19 @@ const contactItems = [
   {
     label: "WhatsApp",
     value: "322 844 1820",
-    href: "https://wa.me/573228441820?text=Hola%20Diego%2C%20quiero%20informacion%20sobre%20un%20proyecto.",
+    href: "https://wa.me/573228441820?text=Hola%20Escalvia%2C%20quiero%20informacion%20sobre%20un%20proyecto.",
     icon: MessageCircle,
   },
 ];
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MIN_SECONDS_ON_PAGE = 4;
+const MIN_SECONDS_BETWEEN_SUBMITS = 20;
+const MAX_MESSAGE_LENGTH = 1200;
+
+function sanitizeInput(value) {
+  return value.replace(/[<>]/g, "").replace(/\s+/g, " ").trim();
+}
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -197,12 +206,15 @@ function App() {
     nombre: "",
     correo: "",
     mensaje: "",
+    website: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formNotice, setFormNotice] = useState({
     type: "",
     text: "",
   });
+  const formOpenedAtRef = useRef(Date.now());
+  const lastSubmitAtRef = useRef(0);
   const year = new Date().getFullYear();
 
   useEffect(() => {
@@ -242,15 +254,72 @@ function App() {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     setFormNotice({ type: "", text: "" });
+    const now = Date.now();
+
+    if (formData.website.trim() !== "") {
+      setFormNotice({
+        type: "success",
+        text: "Mensaje enviado correctamente. Te respondere pronto.",
+      });
+      return;
+    }
+
+    if (now - formOpenedAtRef.current < MIN_SECONDS_ON_PAGE * 1000) {
+      setFormNotice({
+        type: "error",
+        text: "Por seguridad, espera unos segundos y vuelve a enviar el formulario.",
+      });
+      return;
+    }
+
+    if (now - lastSubmitAtRef.current < MIN_SECONDS_BETWEEN_SUBMITS * 1000) {
+      setFormNotice({
+        type: "error",
+        text: "Espera un momento antes de enviar otro mensaje.",
+      });
+      return;
+    }
+
+    const cleanNombre = sanitizeInput(formData.nombre);
+    const cleanCorreo = sanitizeInput(formData.correo).toLowerCase();
+    const cleanMensaje = sanitizeInput(formData.mensaje);
+
+    if (cleanNombre.length < 3 || cleanNombre.length > 80) {
+      setFormNotice({
+        type: "error",
+        text: "Ingresa un nombre valido (entre 3 y 80 caracteres).",
+      });
+      return;
+    }
+
+    if (!EMAIL_PATTERN.test(cleanCorreo)) {
+      setFormNotice({
+        type: "error",
+        text: "Ingresa un correo valido.",
+      });
+      return;
+    }
+
+    if (cleanMensaje.length < 10 || cleanMensaje.length > MAX_MESSAGE_LENGTH) {
+      setFormNotice({
+        type: "error",
+        text: "El mensaje debe tener entre 10 y 1200 caracteres.",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
       const payload = new FormData();
-      payload.append("nombre", formData.nombre);
-      payload.append("correo", formData.correo);
-      payload.append("mensaje", formData.mensaje);
-      payload.append("_subject", "Nuevo mensaje desde el portafolio de Diego Mojica");
-      payload.append("_captcha", "false");
+      payload.append("nombre", cleanNombre);
+      payload.append("correo", cleanCorreo);
+      payload.append("mensaje", cleanMensaje);
+      payload.append("website", formData.website);
+      payload.append("_honey", "website");
+      payload.append("_subject", "Nuevo mensaje desde Escalvia");
+      payload.append("_template", "table");
+      payload.append("_captcha", "true");
 
       const response = await fetch("https://formsubmit.co/ajax/diegomojica261@gmail.com", {
         method: "POST",
@@ -263,17 +332,19 @@ function App() {
       if (!response.ok) {
         throw new Error("No se pudo enviar el mensaje");
       }
+      lastSubmitAtRef.current = now;
 
       setFormData({
         nombre: "",
         correo: "",
         mensaje: "",
+        website: "",
       });
       setFormNotice({
         type: "success",
         text: "Mensaje enviado correctamente. Te respondere pronto.",
       });
-    } catch (error) {
+    } catch {
       setFormNotice({
         type: "error",
         text: "No fue posible enviar el mensaje. Intenta de nuevo en un momento.",
@@ -296,9 +367,14 @@ function App() {
             onClick={(event) => handleNavClick(event, "#inicio")}
           >
             <span className="grid h-9 w-9 place-items-center rounded-xl bg-[linear-gradient(145deg,#1d4ed8,#3f74ff)] text-xs text-white">
-              DM
+              EV
             </span>
-            <span className="text-sm">Diego Mojica</span>
+            <span className="leading-tight">
+              <span className="block text-sm">Escalvia</span>
+              <span className="hidden text-[10px] font-bold tracking-[0.08em] text-[#4b6187] sm:block">
+                ESCALAR + VIA TECNOLOGICA
+              </span>
+            </span>
           </a>
 
           <button
@@ -338,15 +414,15 @@ function App() {
             <div className="reveal">
               <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#bcd0ff] bg-[#eef4ff] px-3 py-1.5">
                 <ShieldCheck size={14} className="text-[var(--primary)]" />
-                <p className="text-xs font-extrabold uppercase tracking-[0.06em] text-[var(--primary)]">Ingeniero de software</p>
+                <p className="text-xs font-extrabold uppercase tracking-[0.06em] text-[var(--primary)]">Escalvia | Software para escalar negocios</p>
               </div>
               <h1 className="max-w-3xl text-[2.35rem] leading-[1.08] font-extrabold md:text-[4rem]">
-                Desarrollo soluciones tecnologicas para crecer negocios con orden y velocidad.
+                Creamos la via tecnologica para escalar negocios con software, web y automatizacion.
               </h1>
               <p className="mt-4 max-w-2xl text-[1.05rem] text-[var(--muted-foreground)]">
-                <span className="font-extrabold text-[#173a89]">Soy Diego Alejandro Mojica Parrado, Ingeniero de Software.</span>{" "}
-                Tengo mas de 3 años de experiencia como programador y me enfoco en construir sitios web,
-                automatizaciones, IA aplicada y sistemas a medida con impacto real.
+                <span className="font-extrabold text-[#173a89]">Escalvia significa escalar + via.</span>{" "}
+                Soy Diego Mojica, fundador de la marca, y ayudo a negocios a crecer con tecnologia practica:
+                paginas web, aplicaciones, automatizacion e IA aplicada.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Button asChild>
@@ -388,9 +464,9 @@ function App() {
                           <div className="grid h-[220px] w-full place-items-center bg-[linear-gradient(145deg,#dbe7ff,#b8cdfb)] text-center md:h-[240px]">
                             <div>
                               <div className="mx-auto mb-2 grid h-14 w-14 place-items-center rounded-2xl bg-[linear-gradient(145deg,#2457df,#0b2f83)] text-lg font-extrabold text-white shadow-[0_10px_20px_rgba(12,44,128,0.3)]">
-                                DM
+                                EV
                               </div>
-                              <p className="text-xs font-extrabold text-[#1f438d]">Soluciones de software</p>
+                              <p className="text-xs font-extrabold text-[#1f438d]">Via tecnologica para negocios</p>
                             </div>
                           </div>
                         )}
@@ -522,7 +598,7 @@ function App() {
                   </p>
                   <p className="mt-4 text-sm font-bold text-[var(--primary)]">Solucion</p>
                   <p className="mt-1 text-[var(--muted-foreground)]">
-                    Diseño y desarrollo de sitio web orientado a confianza, claridad de servicios medicos y facilidad
+                    Diseno y desarrollo de sitio web orientado a confianza, claridad de servicios medicos y facilidad
                     de contacto.
                   </p>
                   <div className="mt-4 flex flex-wrap gap-2">
@@ -576,31 +652,30 @@ function App() {
           <div className="mx-auto grid w-[min(1120px,92%)] gap-5 md:grid-cols-[0.84fr_1.16fr] md:items-center">
             <div className="reveal rounded-[24px] bg-[linear-gradient(170deg,#0d388f,#1751ce)] p-7 text-white shadow-[0_18px_46px_rgba(10,28,58,0.16)]">
               <div className="mb-4 grid h-[74px] w-[74px] place-items-center rounded-[18px] bg-white/20 text-xl font-extrabold">
-                DM
+                EV
               </div>
-              <h3 className="text-xl font-extrabold">Diego Alejandro Mojica Parrado</h3>
-              <p className="mt-1 text-white/90">Ingeniero de software</p>
+              <h3 className="text-xl font-extrabold">Escalvia</h3>
+              <p className="mt-1 text-white/90">Fundada por Diego Mojica | Ingenieria de software aplicada</p>
             </div>
 
             <div className="reveal">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.04em] text-[var(--primary)]">Sobre mi</p>
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.04em] text-[var(--primary)]">Sobre Escalvia</p>
               <h2 className="text-3xl font-extrabold md:text-4xl">
-                Construyo tecnologia con enfoque tecnico y vision de negocio
+                Tecnologia con enfoque tecnico y vision de negocio
               </h2>
               <p className="mt-4 text-[var(--muted-foreground)]">
-                Me enfoco en crear soluciones digitales que ayuden a negocios a mejorar su presencia, optimizar
-                procesos y atender mejor a sus clientes. Combino desarrollo solido con implementacion pragmatica.
+                Escalvia nace para resolver problemas reales de negocio con una ruta clara: analizar, construir y
+                escalar. Cada proyecto prioriza impacto comercial y facilidad de uso.
               </p>
               <p className="mt-2 text-[var(--muted-foreground)]">
-                Tengo mas de 3 años de experiencia profesional en una empresa de software, participando en creacion,
-                mantenimiento y mejora de sistemas para salud, costos, servicios publicos, correspondencia, hoteles y
-                sitios web corporativos.
+                Soy Diego Mojica y tengo mas de 3 anos de experiencia profesional construyendo y mejorando sistemas
+                para salud, hoteles, servicios y sitios web corporativos.
               </p>
 
               <div className="mt-4 grid gap-3 sm:grid-cols-3">
                 <Card className="bg-[#f3f8ff]">
                   <CardContent className="p-4">
-                    <p className="text-sm font-extrabold text-[var(--secondary-foreground)]">3+ años</p>
+                    <p className="text-sm font-extrabold text-[var(--secondary-foreground)]">3+ anos</p>
                     <p className="text-xs text-[#47608b]">Experiencia profesional</p>
                   </CardContent>
                 </Card>
@@ -676,7 +751,7 @@ function App() {
           <div className="mx-auto w-[min(1120px,92%)]">
             <div className="reveal mx-auto mb-8 max-w-3xl text-center">
               <p className="mb-2 text-xs font-bold uppercase tracking-[0.04em] text-[var(--primary)]">Experiencia y confianza</p>
-              <h2 className="text-3xl font-extrabold md:text-4xl">Reseña de cliente real</h2>
+              <h2 className="text-3xl font-extrabold md:text-4xl">Resena de cliente real</h2>
               {/* <p className="mt-2 text-[var(--muted-foreground)]">
                 Caso publicado y activo para Ecografias del Llano.
               </p> */}
@@ -706,13 +781,13 @@ function App() {
           <div className="mx-auto w-[min(1120px,92%)]">
             <Card className="reveal rounded-[22px] p-7">
               <h2 className="text-3xl font-extrabold">
-                Si tu negocio necesita una web profesional, automatizar procesos o implementar soluciones tecnologicas,
-                hablemos.
+                En Escalvia creamos la via tecnologica para escalar tu negocio con software a medida, web, apps y
+                automatizacion.
               </h2>
               <div className="mt-5 flex flex-wrap gap-3">
                 <Button asChild>
-                  <a href="https://wa.me/573228441820?text=Hola%20Diego%2C%20quiero%20informacion%20sobre%20un%20proyecto." target="_blank" rel="noreferrer">
-                    Escribirme por WhatsApp
+                  <a href="https://wa.me/573228441820?text=Hola%20Escalvia%2C%20quiero%20informacion%20sobre%20un%20proyecto." target="_blank" rel="noreferrer">
+                    Hablar con Escalvia por WhatsApp
                   </a>
                 </Button>
                 <Button variant="secondary" asChild>
@@ -727,9 +802,10 @@ function App() {
           <div className="mx-auto grid w-[min(1120px,92%)] gap-5 lg:grid-cols-2">
             <div className="reveal">
               <p className="mb-2 text-xs font-bold uppercase tracking-[0.04em] text-[var(--primary)]">Contacto</p>
-              <h2 className="text-3xl font-extrabold md:text-4xl">Conversemos sobre tu proyecto</h2>
+              <h2 className="text-3xl font-extrabold md:text-4xl">Conversemos sobre tu proyecto en Escalvia</h2>
               <p className="mt-3 text-[var(--muted-foreground)]">
-                Cuentame que necesitas y te respondo con un enfoque claro de solucion, alcance y siguientes pasos.
+                Cuentame que necesitas y te respondo con una propuesta clara: solucion, alcance, tiempos y siguientes
+                pasos.
               </p>
 
               <ul className="mt-4 space-y-3">
@@ -757,6 +833,17 @@ function App() {
             <Card className="reveal">
               <CardContent className="space-y-3 p-5">
                 <form onSubmit={handleFormSubmit} className="space-y-3">
+                  <label className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+                    Website
+                    <input
+                      name="website"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={formData.website}
+                      onChange={handleFormChange}
+                    />
+                  </label>
                   <label className="block text-sm font-semibold text-[#27416a]">
                     Nombre
                     <input
@@ -765,6 +852,7 @@ function App() {
                       type="text"
                       value={formData.nombre}
                       onChange={handleFormChange}
+                      maxLength={80}
                       placeholder="Tu nombre"
                       className="mt-1 w-full rounded-xl border border-[#c9d7ef] px-3 py-3 outline-none focus:border-[#79a2ff] focus:ring-2 focus:ring-[rgba(29,78,216,0.2)]"
                     />
@@ -777,6 +865,7 @@ function App() {
                       type="email"
                       value={formData.correo}
                       onChange={handleFormChange}
+                      maxLength={120}
                       placeholder="tu@email.com"
                       className="mt-1 w-full rounded-xl border border-[#c9d7ef] px-3 py-3 outline-none focus:border-[#79a2ff] focus:ring-2 focus:ring-[rgba(29,78,216,0.2)]"
                     />
@@ -788,6 +877,7 @@ function App() {
                       name="mensaje"
                       value={formData.mensaje}
                       onChange={handleFormChange}
+                      maxLength={MAX_MESSAGE_LENGTH}
                       rows="5"
                       placeholder="Cuentame sobre tu proyecto"
                       className="mt-1 w-full rounded-xl border border-[#c9d7ef] px-3 py-3 outline-none focus:border-[#79a2ff] focus:ring-2 focus:ring-[rgba(29,78,216,0.2)]"
@@ -818,9 +908,9 @@ function App() {
       <footer className="relative z-10 border-t border-[var(--border)] bg-white">
         <div className="mx-auto grid min-h-[112px] w-[min(1120px,92%)] gap-4 py-6 md:grid-cols-[1.2fr_1fr_auto] md:items-center">
           <div>
-            <p className="font-extrabold">Diego Alejandro Mojica Parrado</p>
+            <p className="font-extrabold">Escalvia</p>
             <p className="text-sm text-[var(--muted-foreground)]">
-              Ingeniero de Software. Soluciones tecnolÃ³gicas para negocios.
+              Creamos la via tecnologica para escalar negocios.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
@@ -830,7 +920,7 @@ function App() {
               </a>
             ))}
           </div>
-          <p className="text-sm text-[var(--muted-foreground)]">Â© {year} Diego Mojica</p>
+          <p className="text-sm text-[var(--muted-foreground)]">© {year} Escalvia</p>
         </div>
       </footer>
     </div>
@@ -838,4 +928,3 @@ function App() {
 }
 
 export default App;
-
