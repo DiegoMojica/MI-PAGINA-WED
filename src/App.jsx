@@ -363,17 +363,26 @@ function App() {
         <div className="mx-auto flex min-h-[76px] w-[min(1120px,92%)] items-center justify-between gap-4">
           <a
             href="#inicio"
-            className="inline-flex items-center gap-2 font-extrabold"
+            className="inline-flex items-center"
             onClick={(event) => handleNavClick(event, "#inicio")}
+            aria-label="Ir al inicio de Escalvia"
           >
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-[linear-gradient(145deg,#1d4ed8,#3f74ff)] text-xs text-white">
-              EV
-            </span>
-            <span className="leading-tight">
-              <span className="block text-sm">Escalvia</span>
-              <span className="hidden text-[10px] font-bold tracking-[0.08em] text-[#4b6187] sm:block">
-                ESCALAR + VÍA TECNOLÓGICA
+            <span className="inline-flex h-[60px] w-[60px] items-center justify-center rounded-[20px] bg-[linear-gradient(160deg,#2f62e8,#2b57cc)] shadow-[0_6px_14px_rgba(20,61,170,0.2)] ring-1 ring-[#87a7ff] sm:h-[64px] sm:w-[64px]">
+              <span className="inline-flex h-[50px] w-[50px] items-center justify-center rounded-2xl bg-white sm:h-[54px] sm:w-[54px]">
+                <img
+                  src="/logo-escalvia.webp"
+                  alt="Escalvia"
+                  width="256"
+                  height="256"
+                  loading="eager"
+                  decoding="async"
+                  className="h-11 w-11 rounded-md object-contain"
+                />
               </span>
+            </span>
+            <span className="ml-3 hidden leading-tight sm:block">
+              <span className="block text-[30px] font-extrabold leading-none text-[#1b3560]">Escalvia</span>
+              <span className="mt-1 block text-[11px] font-bold tracking-[0.08em] text-[#4b6187]">ESCALAR + VIA TECNOLOGICA</span>
             </span>
           </a>
 
@@ -381,7 +390,7 @@ function App() {
             type="button"
             onClick={() => setMenuOpen((prev) => !prev)}
             className="grid h-11 w-11 place-items-center rounded-xl border border-[var(--border)] md:hidden"
-            aria-label="Abrir menú"
+            aria-label="Abrir menu"
           >
             {menuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
@@ -664,38 +673,46 @@ function App() {
         <section id="sobre-mi" className="relative z-10 py-20 md:py-24">
           <div className="mx-auto grid w-[min(1120px,92%)] gap-5 md:grid-cols-[0.84fr_1.16fr] md:items-center">
             <div className="reveal rounded-[24px] bg-[linear-gradient(170deg,#0d388f,#1751ce)] p-7 text-white shadow-[0_18px_46px_rgba(10,28,58,0.16)]">
-              <div className="mb-4 grid h-[74px] w-[74px] place-items-center rounded-[18px] bg-white/20 text-xl font-extrabold">
-                EV
+              <div className="inline-flex h-32 w-32 items-center justify-center rounded-3xl bg-[linear-gradient(160deg,rgba(255,255,255,0.2),rgba(255,255,255,0.08))] shadow-[0_14px_30px_rgba(4,15,46,0.34)] ring-1 ring-white/35">
+                <img
+                  src="/logo-escalvia.webp"
+                  alt="Logo Escalvia"
+                  width="520"
+                  height="128"
+                  loading="lazy"
+                  decoding="async"
+                  className="h-24 w-24 rounded-2xl object-cover"
+                />
               </div>
-              <h3 className="text-xl font-extrabold">Escalvia</h3>
-              <p className="mt-1 text-white/90">Fundada por Diego Mojica | Ingeniería de software aplicada</p>
+              <h3 className="mt-5 text-2xl font-extrabold">Escalvia</h3>
+              <p className="mt-1 max-w-sm text-white/90">Fundada por Diego Mojica - Ingeniero de software</p>
             </div>
 
             <div className="reveal">
               <p className="mb-2 text-xs font-bold uppercase tracking-[0.04em] text-[var(--primary)]">Sobre Escalvia</p>
               <h2 className="text-3xl font-extrabold md:text-4xl">
-                Tecnología con enfoque técnico y visión de negocio
+                Tecnolog&iacute;a con enfoque t&eacute;cnico y visi&oacute;n de negocio
               </h2>
               <p className="mt-4 text-[var(--muted-foreground)]">
                 Escalvia nace para resolver problemas reales de negocio con una ruta clara: analizar, construir y
                 escalar. Cada proyecto prioriza impacto comercial y facilidad de uso.
               </p>
               <p className="mt-2 text-[var(--muted-foreground)]">
-                Soy Diego Mojica y tengo más de 3 años de experiencia profesional construyendo y mejorando sistemas
+                Soy Diego Mojica y tengo m&aacute;s de 3 a&ntilde;os de experiencia profesional construyendo y mejorando sistemas
                 para salud, hoteles, servicios y sitios web corporativos.
               </p>
 
               <div className="mt-4 grid gap-3 sm:grid-cols-3">
                 <Card className="bg-[#f3f8ff]">
                   <CardContent className="p-4">
-                    <p className="text-sm font-extrabold text-[var(--secondary-foreground)]">3+ años</p>
+                    <p className="text-sm font-extrabold text-[var(--secondary-foreground)]">3+ a&ntilde;os</p>
                     <p className="text-xs text-[#47608b]">Experiencia profesional</p>
                   </CardContent>
                 </Card>
                 <Card className="bg-[#f3f8ff]">
                   <CardContent className="p-4">
                     <p className="text-sm font-extrabold text-[var(--secondary-foreground)]">Sectores reales</p>
-                    <p className="text-xs text-[#47608b]">Salud, hoteles, servicios públicos y más</p>
+                    <p className="text-xs text-[#47608b]">Salud, hoteles, servicios p&uacute;blicos y m&aacute;s</p>
                   </CardContent>
                 </Card>
                 <Card className="bg-[#f3f8ff]">
