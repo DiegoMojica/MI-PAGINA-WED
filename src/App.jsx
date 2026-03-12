@@ -613,15 +613,15 @@ function App() {
                   </div>
                 </div>
                 <div className="p-6 md:p-8">
-                  <p className="text-sm font-bold text-[var(--primary)]">Problema</p>
+                  <p className="text-sm font-bold text-[var(--primary)]">Implementación</p>
                   <p className="mt-1 text-[var(--muted-foreground)]">
-                    La página que tenían estaba desactualizada; querían una mejor presentación y que fuera adaptable a
-                    todo tipo de tamaños de pantalla.
+                    Diseño y desarrollo de un sitio web corporativo moderno, con estructura clara, presentación
+                    profesional y navegación optimizada para pacientes.
                   </p>
-                  <p className="mt-4 text-sm font-bold text-[var(--primary)]">Solución</p>
+                  <p className="mt-4 text-sm font-bold text-[var(--primary)]">Resultado</p>
                   <p className="mt-1 text-[var(--muted-foreground)]">
-                    Diseño y desarrollo de un sitio web moderno, con presentación profesional, claridad de servicios
-                    médicos y diseño responsive para cualquier dispositivo.
+                    Sitio web responsive publicado, con información de servicios médicos, canales de contacto visibles
+                    y experiencia fluida en computador, tablet y móvil.
                   </p>
                   <div className="mt-4 flex flex-wrap gap-2">
                     <Badge>HTML</Badge>
